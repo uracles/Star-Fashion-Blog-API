@@ -6,25 +6,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Likes extends BaseEntity{
+@Table(name = "Like_table")
+public class Like extends BaseEntity{
 
     private int count;
 
     @ManyToOne
-    private Posts posts;
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;
 
     @ManyToOne
-    private Comments comments;
+    @JoinColumn(name = "blogUser_id", referencedColumnName = "id")
+    private BlogUser user;
 
-    @ManyToOne
-    private Visitors visitors;
+
 
 
 }
