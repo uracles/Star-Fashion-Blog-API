@@ -22,7 +22,7 @@ public class Category {
     @Column(name="category_id")
     private Long id;
 
-    private String name;
+    private String categoryName;
 
     @OneToMany (mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Post> post = new ArrayList<>();

@@ -1,9 +1,6 @@
 package com.merakool.star_fashion.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -32,14 +30,15 @@ public class Post extends BaseEntity{
 //    @JsonIgnore
     @OneToMany (mappedBy = "post", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
+//    private Integer likes;
 
 //    @JsonIgnore
     @OneToMany (mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-//    @ManyToOne
-//    @JoinColumn (name = "blogUser_id", referencedColumnName = "id")
-//    private BlogUser blogUser;
+    @ManyToOne
+    @JoinColumn (name = "blogUser_id", referencedColumnName = "id")
+    private BlogUser blogUser;
 
 
 }

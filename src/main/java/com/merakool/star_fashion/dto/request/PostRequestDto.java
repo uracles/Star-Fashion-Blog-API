@@ -17,5 +17,7 @@ public class PostRequestDto {
 
     private String title;
 
-//    private Category category;
+    private Category category;
+
+    private Long blogUser_id;
 }
