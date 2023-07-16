@@ -23,6 +23,9 @@ public class BaseEntity {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+//    @CreatedDate
+//    @Column(name = "created_time")
+//    private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;

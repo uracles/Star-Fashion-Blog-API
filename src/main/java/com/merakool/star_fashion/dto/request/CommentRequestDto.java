@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class CommentRequestDto {
     @NotBlank(message="comment cannot be null")
-    private String context;
+    private String commentText;
 
     @NotBlank(message="ID of commenter required")
     private Long userId;

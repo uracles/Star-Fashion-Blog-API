@@ -16,7 +16,7 @@ import java.util.List;
 public class Comment extends BaseEntity{
 
     @Column(length = 250)
-    private String context;
+    private String commentText;
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 public class CommentResponseDto {
 
     private Long id;
-    private String context;
+    private String commentText;
     private Post post;
     private BlogUser userId;
 }

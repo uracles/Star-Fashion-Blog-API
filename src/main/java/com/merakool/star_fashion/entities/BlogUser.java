@@ -28,9 +28,6 @@ public class BlogUser extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @CreatedDate
-    @Column(name = "created_time")
-    private LocalDateTime createdAt;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
