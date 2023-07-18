@@ -12,4 +12,3 @@ Fashion blog API for a designer to post designs, receive feedback, and interact 
 
 · JUnit/Mockito
 
-.H2 database
