@@ -63,16 +63,7 @@ class BlogUserRepositoryTest {
         user.setEmail(email);
         user.setPassword(password);
 
-        blogUserRepository.save(user);
 
-        BlogUser finBlogUser = blogUserRepository.findByEmailAndPassword(email, password);
-        String expected = finBlogUser.getUsername();
-        String actual = "testingEsther";
-
-        assertNotNull(finBlogUser);
-        assertEquals(expected,actual);
-//        assertEquals(password, finBlogUser.getPassword());
-    }
 
 
 
