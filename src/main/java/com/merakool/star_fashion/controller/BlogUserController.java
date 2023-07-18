@@ -15,7 +15,7 @@ public class BlogUserController {
     private final BlogUserService blogUserService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody @Valid BlogUserRequestDto userSignUpDto){
+    public ResponseEntity<?> registerUser(@RequestBody @Valid BlogUserRequestDto userSignUpDto) {
         var response = blogUserService.createUser(userSignUpDto);
         return ResponseEntity.ok(response);
     }
@@ -23,21 +23,21 @@ public class BlogUserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> logIn(@Valid @RequestBody BlogUserRequestDto userLogInDto) {
-       var loginResponse = blogUserService.getUserByEmailAndPassword(userLogInDto.getEmail(), userLogInDto.getPassword());
+        var loginResponse = blogUserService.getUserByEmailAndPassword(userLogInDto.getEmail(), userLogInDto.getPassword());
         return ResponseEntity.ok(loginResponse);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findAppUser(@PathVariable Long id){
+    public ResponseEntity<?> findAppUser(@PathVariable Long id) {
         var response = blogUserService.getUserById(id);
         return ResponseEntity.ok(response);
     }
 
 
-    @GetMapping("/logout")
-    public ResponseEntity<String> logOut() {
-        var response = blogUserService.logOutUser();
+    @GetMapping("/logout/{userId}")
+    public ResponseEntity<String> logOut(@PathVariable Long userId) {
+        var response = blogUserService.logOutUser(userId);
         return ResponseEntity.ok(response);
     }
 }

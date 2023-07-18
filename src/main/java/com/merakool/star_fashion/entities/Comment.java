@@ -22,14 +22,10 @@ public class Comment extends BaseEntity{
     @JoinColumn
     private Post post;
 
-    @OneToMany (mappedBy = "comments", cascade = CascadeType.ALL)
-    private List<Like> like = new ArrayList<>();
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER) //CHECK THIS LAZY AND EAGER ON DB
     @JoinColumn
-    private BlogUser userId;
-
-
+    private BlogUser blogUserId;
 
 
 }

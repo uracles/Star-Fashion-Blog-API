@@ -12,6 +12,7 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Builder
 @Getter
@@ -21,25 +22,25 @@ public class Mapper {
                 .id(user.getId())
                 .email(user.getEmail())
                 .username(user.getUsername())
-//                .role(user.getRole())
-//                .gender(user.getGender())
-//                .createdAt(LocalDateTime.now())
+                .role(user.getRole())
+                .gender(user.getGender())
+                .createdAt(LocalDateTime.now())
 
                 .build();
     }
 
     public static PostResponseDto convertPostToPostResponseDto(Post post) {
         return PostResponseDto.builder()
-//                .id(post.getId())
+                .id(post.getId())
 
                 .title(post.getTitle())
                 .content(post.getContent())
                 .category(post.getCategory())
                 .imageUrl(post.getImageUrl())
+                .blogUser(post.getBlogUser().getUsername())
+//                .likes(post.getLikes().size() + " likes")
+//                .comments(post.getComments() + " comments")
 
-//                .comments(new ArrayList<>())
-
-//                .createdAt(post.getCreatedAt())
                 .build();
     }
 
@@ -47,7 +48,27 @@ public class Mapper {
         return CommentResponseDto.builder()
 
                 .id(comment.getId())
-                .context(comment.getContext())
+                .commentText(comment.getCommentText())
+                .blogUser(comment.getBlogUserId().getUsername())
+//                .post(comment.getPost())
+                .build();
+    }
+
+    public static PostResponseDto convertLikeToPostResponseDto(Post post) {
+        return PostResponseDto.builder()
+                .id(post.getId())
+
+                .title(post.getTitle())
+                .content(post.getContent())
+                .category(post.getCategory())
+                .imageUrl(post.getImageUrl())
+                .blogUser(post.getBlogUser().getUsername())
+                .likes(post.getLikes().size()+" likes")
+                .comments(post.getComments().stream()
+                .map(comment -> comment.getCommentText() + " comments")
+                .collect(Collectors.toList()))
+//                .comments(post.getComments())
+
                 .build();
     }
 }

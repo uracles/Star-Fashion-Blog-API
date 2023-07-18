@@ -2,6 +2,7 @@ package com.merakool.star_fashion.dto.request;
 
 import com.merakool.star_fashion.enums.Gender;
 import com.merakool.star_fashion.enums.Role;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,8 +15,9 @@ import javax.validation.constraints.Size;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class BlogUserRequestDto {
-    @NotBlank(message = "please provide a name")
+//    @NotBlank(message = "please provide a name")
     private String username;
 
     @Email(message = "please provide a valid email")
@@ -29,6 +31,7 @@ public class BlogUserRequestDto {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    @Enumerated(EnumType.STRING)
+
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 }

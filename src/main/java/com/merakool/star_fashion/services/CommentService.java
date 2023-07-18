@@ -7,7 +7,7 @@ import com.merakool.star_fashion.entities.Comment;
 import java.util.List;
 
 public interface CommentService {
-    CommentResponseDto makeComment(CommentRequestDto createComment);
+    CommentResponseDto makeComment(CommentRequestDto createComment, Long postId);
 
     Comment getCommentById(Long commentId);
 

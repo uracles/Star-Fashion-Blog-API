@@ -2,6 +2,7 @@ package com.merakool.star_fashion.services.implementation;
 
 import com.merakool.star_fashion.dto.request.CommentRequestDto;
 import com.merakool.star_fashion.dto.response.CommentResponseDto;
+import com.merakool.star_fashion.entities.BlogUser;
 import com.merakool.star_fashion.entities.Comment;
 import com.merakool.star_fashion.entities.Post;
 import com.merakool.star_fashion.exceptions.NotFoundException;
@@ -24,17 +25,26 @@ public class CommentServiceImpl implements CommentService {
     private final PostService postService;
 
     @Override
-    public CommentResponseDto makeComment(CommentRequestDto createComment) {
-        return Mapper.generateCommentToCommentResponseDto(commentRepository.save(
-                Comment.builder()
-                        .context(createComment.getContext())
-                        .post(postService.getPostById(createComment.getPostId())
-                                .orElseThrow(() -> new NotFoundException("post doesn't exist")))
-                        .userId(blogUserRepository.findById(createComment.getUserId())
-                                .orElseThrow(() -> new NotFoundException("this user doesn't exist in the database")))
-                        .build()
-        ));
+    public CommentResponseDto makeComment(CommentRequestDto createComment, Long postId) {
+        // Get the Post by postId
+        Post post = postService.getPostById(postId);
+//                .orElseThrow(() -> new NotFoundException("Post not found with ID"));
+
+        // Check if the user with createComment.getUserId() exists in the database
+        BlogUser blogUser = blogUserRepository.findById(createComment.getBlogUser().getId())
+                .orElseThrow(() -> new NotFoundException("User not found with ID"));
+
+        // Create and save the comment
+        Comment comment = Comment.builder()
+                .commentText(createComment.getCommentText())
+                .post(post)
+                .blogUserId(blogUser)
+                .build();
+
+        return Mapper.generateCommentToCommentResponseDto(commentRepository.save(comment));
     }
+
+
 
 
     @Override

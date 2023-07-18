@@ -70,9 +70,9 @@ public class BlogUserServiceImpl implements BlogUserService {
     }
 
     @Override
-    public String logOutUser() {
+    public String logOutUser(Long userId) {
         httpSession.invalidate();
-        return "user Logged Out";
+        return "User with ID " + userId + " has been successfully logged out.";
     }
 }
 

@@ -3,6 +3,8 @@ package com.merakool.star_fashion.entities;
 import com.merakool.star_fashion.enums.Gender;
 import com.merakool.star_fashion.enums.Role;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -17,7 +19,17 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "blog_user_table")
-public class BlogUser extends BaseEntity {
+public class BlogUser {
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @Column(nullable = false)
     private String username;

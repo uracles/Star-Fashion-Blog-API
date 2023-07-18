@@ -1,8 +1,13 @@
 package com.merakool.star_fashion.dto.response;
 
-import com.merakool.star_fashion.entities.Category;
+import com.merakool.star_fashion.entities.BlogUser;
+import com.merakool.star_fashion.entities.Comment;
+import com.merakool.star_fashion.enums.Category;
+import com.merakool.star_fashion.enums.Role;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -17,7 +22,9 @@ public class PostResponseDto {
 
     private Category category;
 
-    private Integer likes;
+    private String blogUser;
 
-    private Integer comments;
+    private String likes;
+
+    private List<String> comments;
 }

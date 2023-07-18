@@ -1,5 +1,7 @@
 package com.merakool.star_fashion.dto.request;
 
+import com.merakool.star_fashion.entities.BlogUser;
+import com.merakool.star_fashion.entities.Post;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,8 +13,9 @@ public class CommentRequestDto {
     @NotBlank(message="comment cannot be null")
     private String commentText;
 
-    @NotBlank(message="ID of commenter required")
-    private Long userId;
+    private BlogUser blogUser;
 
-    private Long postId;
+    private Post post;
+
+
 }

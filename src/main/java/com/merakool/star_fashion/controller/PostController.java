@@ -2,6 +2,7 @@ package com.merakool.star_fashion.controller;
 
 import com.merakool.star_fashion.dto.request.PostRequestDto;
 import com.merakool.star_fashion.entities.Post;
+import com.merakool.star_fashion.enums.Category;
 import com.merakool.star_fashion.services.LikeService;
 import com.merakool.star_fashion.services.PostService;
 import lombok.AllArgsConstructor;
@@ -20,47 +21,47 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @PostMapping("/make-post/{id}")
-//    @PostMapping("/{id}")
-    public ResponseEntity<?> createPost(@PathVariable("id") Long categoryId,
+    @PostMapping("/make-post/{blogUserId}")
+    public ResponseEntity<?> createPost(@PathVariable("blogUserId")Long blogUserId,
                                         @Valid @RequestBody PostRequestDto upLoadPostDto) {
-        var response = postService.uploadPost(upLoadPostDto, categoryId);
+        var response = postService.uploadPost(upLoadPostDto, blogUserId);
         return ResponseEntity.ok(response);
     }
 
 
-    @PostMapping("/modifyPost/{id}")
-    public ResponseEntity<?> updatePost(@PathVariable("id") Long postId,
+    @PutMapping("/modifyPost/{postId}")
+    public ResponseEntity<?> updatePost(@PathVariable("postId") Long postId,
                                         @Valid @RequestBody PostRequestDto updatePostDto) {
         var response = postService.modifyPost(updatePostDto, postId);
         return ResponseEntity.ok(response);
     }
 
 
+
     @GetMapping("/viewAllPost")
-//    public Page<Post> viewAllPost(Pageable pageable) {
-//        return postService.getAllPost(pageable);
-
-    public ResponseEntity<?> viewAllPost(Pageable pageable) {
-        var response = postService.getAllPost(pageable);
+    public ResponseEntity<Page<Post>> viewAllPost(Pageable pageable) {
+        Page<Post> response = postService.getAllPost(pageable);
         return ResponseEntity.ok(response);
     }
 
 
-    @GetMapping("/postByCategoryId/{categoryId}")
-    public ResponseEntity<List<?>> viewPostByCategoryId(@PathVariable("categoryId") Long categoryId) {
-        var response = postService.viewPostByCategory(categoryId);
+    @DeleteMapping("/{postId}/delete")
+    public ResponseEntity<?> deletePost(@PathVariable("postId") Long postId) {
+        var response = postService.deletePost(postId);
         return ResponseEntity.ok(response);
     }
 
 
-    @DeleteMapping("/{postId}")
-    public void deletePost(@PathVariable("postId") Long postId) {
-        postService.deletePost(postId);
-
-//    @DeleteMapping("/delete/{postId}")
-//    public void deletePost(@PathVariable Long postId) {
-//        postService.deletePost(postId);
-//    }
+    @PostMapping("/{userId}/{postId}/like")
+    public ResponseEntity<?> likePost(@PathVariable Long postId, @PathVariable Long userId) {
+        var totalLikes = postService.likePost(userId, postId);
+        return ResponseEntity.ok(totalLikes);
     }
+
+    @PostMapping("/{userId}/{postId}/unlike")
+    public ResponseEntity<?> unlikePost(@PathVariable Long postId, @PathVariable Long userId) {
+        var totalLikes = postService.unlikePost(userId, postId);
+        return ResponseEntity.ok(totalLikes);
+    }
+
 }

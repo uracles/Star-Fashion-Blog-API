@@ -16,12 +16,11 @@ import java.util.List;
 @RequestMapping("/api/comment")
 public class CommentController {
     private final CommentService commentService;
-    private final LikeService likeService;
 
-    @PostMapping("/make-comment")
-    //    @PostMapping("/{id}")
-    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequestDto commentRequest){
-        var response = commentService.makeComment(commentRequest);
+    @PostMapping("/{postId}/make-comment")
+    public ResponseEntity<?> createComment(@PathVariable("postId") Long postId,
+                                           @Valid @RequestBody CommentRequestDto commentRequest){
+        var response = commentService.makeComment(commentRequest, postId);
         return ResponseEntity.ok(response);
     }
 

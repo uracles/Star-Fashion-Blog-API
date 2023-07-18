@@ -13,6 +13,6 @@ public interface BlogUserService {
 
     String deleteUser(Long blogUserId);
 
-    String logOutUser();
+    String logOutUser(Long userId);
 
 }
