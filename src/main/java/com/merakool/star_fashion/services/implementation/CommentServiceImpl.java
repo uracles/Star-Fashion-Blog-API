@@ -34,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
         BlogUser blogUser = blogUserRepository.findById(createComment.getBlogUser().getId())
                 .orElseThrow(() -> new NotFoundException("User not found with ID"));
 
-        // Create and save the comment
+        
         Comment comment = Comment.builder()
                 .commentText(createComment.getCommentText())
                 .post(post)
@@ -44,15 +44,11 @@ public class CommentServiceImpl implements CommentService {
         return Mapper.generateCommentToCommentResponseDto(commentRepository.save(comment));
     }
 
-
-
-
     @Override
     public Comment getCommentById(Long commentId) {
         return commentRepository.findById(commentId).orElseThrow(
                 ()-> new NotFoundException("No comment with this ID in database"));
     }
-
 
     @Override
     public void deleteComment(Long commentId) {
